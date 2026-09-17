@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5efe4;
+  --foreground: #30231e;
+  --ink: #30231e;
+  --coral: #e96955;
+  --yellow: #f5c95b;
+  --cream: #fffaf0;
+  --brown: #a96543;
 }
 
 @theme inline {
@@ -12,15 +17,117 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.birthday-page {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 56px 20px 28px;
+  background-color: var(--background);
+  background-image: radial-gradient(#dfd2c0 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.birthday-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 680px);
+  padding: 34px clamp(24px, 7vw, 72px) 42px;
+  text-align: center;
+  background: var(--cream);
+  border: 1px solid #eadfce;
+  box-shadow: 14px 14px 0 #d9c8af;
+  animation: arrive 700ms cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.card-topline, .wish-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.eyebrow, .kicker, .wish-row, .footer-note {
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.eyebrow { color: var(--coral); }
+.paw-mark { color: var(--yellow); font-size: 22px; }
+
+.dog-portrait {
+  width: 174px;
+  height: 174px;
+  position: relative;
+  margin: 35px auto 27px;
+  animation: bob 4s ease-in-out 800ms infinite;
+}
+
+.dog-face {
+  position: absolute;
+  inset: 15px 18px 6px;
+  z-index: 2;
+  border-radius: 46% 46% 45% 45%;
+  background: #c77b51;
+  border: 4px solid var(--ink);
+}
+
+.dog-ear {
+  position: absolute;
+  z-index: 1;
+  top: 17px;
+  width: 51px;
+  height: 88px;
+  background: var(--brown);
+  border: 4px solid var(--ink);
+}
+
+.dog-ear-left { left: 2px; border-radius: 65% 30% 60% 40%; transform: rotate(-17deg); }
+.dog-ear-right { right: 2px; border-radius: 30% 65% 40% 60%; transform: rotate(17deg); }
+.dog-eye { position: absolute; top: 57px; width: 11px; height: 15px; border-radius: 50%; background: var(--ink); }
+.dog-eye-left { left: 39px; }
+.dog-eye-right { right: 39px; }
+.dog-muzzle { position: absolute; left: 50%; top: 79px; width: 62px; height: 48px; transform: translateX(-50%); border-radius: 50%; background: #f4c49a; }
+.dog-nose { position: absolute; top: 7px; left: 50%; width: 22px; height: 14px; transform: translateX(-50%); border-radius: 50%; background: var(--ink); }
+.dog-smile { position: absolute; left: 50%; top: 20px; width: 22px; height: 13px; transform: translateX(-50%); border-bottom: 3px solid var(--ink); border-radius: 0 0 50% 50%; }
+.dog-collar { position: absolute; z-index: 3; bottom: 10px; left: 50%; width: 107px; height: 20px; transform: translateX(-50%); border: 4px solid var(--ink); border-radius: 20px; background: var(--coral); }
+.collar-tag { position: absolute; left: 50%; top: 10px; width: 27px; height: 27px; transform: translateX(-50%); display: grid; place-items: center; border: 3px solid var(--ink); border-radius: 50%; background: var(--yellow); color: var(--ink); font-size: 12px; }
+
+.kicker { margin: 0 0 12px; color: var(--coral); }
+h1 { margin: 0; color: var(--ink); font-family: Georgia, serif; font-size: clamp(42px, 8vw, 72px); font-weight: 400; letter-spacing: -.045em; line-height: .98; }
+h1 em { color: var(--coral); font-weight: 700; }
+.message { max-width: 470px; margin: 24px auto 27px; color: #705f54; font-size: 16px; line-height: 1.7; }
+.wish-row { justify-content: center; gap: 13px; color: var(--ink); font-size: 10px; }
+.wish-row i { width: 4px; height: 4px; border-radius: 50%; background: var(--yellow); }
+.signature { margin: 32px 0 0; color: #8b7567; font-family: Georgia, serif; font-size: 17px; font-style: italic; }
+.signature span { color: var(--coral); font-style: normal; }
+.footer-note { position: relative; z-index: 1; align-self: end; margin: 44px 0 0; color: #a38d7d; }
+.confetti { position: absolute; width: 10px; height: 25px; border-radius: 5px; opacity: .9; }
+.confetti-one { top: 14%; left: 13%; background: var(--coral); transform: rotate(27deg); }
+.confetti-two { top: 31%; right: 14%; height: 10px; width: 26px; background: var(--yellow); transform: rotate(-24deg); }
+.confetti-three { bottom: 17%; left: 17%; height: 10px; width: 22px; background: #83a5a1; transform: rotate(-35deg); }
+
+@keyframes arrive { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-7px) rotate(1deg); } }
+
+@media (max-width: 540px) {
+  .birthday-page { padding: 28px 15px 20px; }
+  .birthday-card { padding: 26px 20px 32px; box-shadow: 8px 8px 0 #d9c8af; }
+  .dog-portrait { margin-top: 27px; }
+  .message { font-size: 15px; line-height: 1.6; }
+  .wish-row { gap: 7px; letter-spacing: .08em; font-size: 9px; }
+  .confetti-one { left: 4%; }
+  .confetti-two { right: 4%; }
 }
