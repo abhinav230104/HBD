@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Happy Birthday, Kalu!",
-  description: "A birthday wish for the very best dog, Kalu.",
+  description: "A birthday wish for the very very best dog, Kalu.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
